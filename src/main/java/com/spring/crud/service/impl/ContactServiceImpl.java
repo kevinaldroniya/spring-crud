@@ -9,6 +9,7 @@ import com.spring.crud.service.ValidationService;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -91,8 +92,10 @@ public class ContactServiceImpl implements ContactService {
 
         Page<Contact> contactPage = contactRepository.findAll(specification, pageable);
 
+        List<ContactResponse> list = contactPage.getContent().stream().map(this::toContactResponse).toList();
 
-        return null;
+
+        return new PageImpl<>(list, pageable, contactPage.getTotalElements());
     }
 
     private ContactResponse toContactResponse(Contact contact) {

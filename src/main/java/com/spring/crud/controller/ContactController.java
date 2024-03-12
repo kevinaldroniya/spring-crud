@@ -66,5 +66,11 @@ public class ContactController {
                 .build();
 
         Page<ContactResponse> contactResponsePage = contactService.getAllContact(user, request);
+        return WebResponse.<List<ContactResponse>>builder().data(contactResponsePage.getContent())
+                .paging(PagingResponse.builder()
+                        .currentPage(contactResponsePage.getNumber())
+                        .totalPage(contactResponsePage.getTotalPages())
+                        .size(contactResponsePage.getSize()).build())
+                .build();
     }
 }
