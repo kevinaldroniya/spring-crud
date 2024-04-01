@@ -1,9 +1,6 @@
 package com.spring.crud.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,4 +26,8 @@ public class Address {
 
     @Column(name = "postal_code")
     private String postalCode;
+
+    @ManyToOne
+    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+    private Contact contact;
 }

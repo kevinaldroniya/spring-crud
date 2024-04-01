@@ -12,4 +12,6 @@ public interface ContactService {
     public ContactResponse updateContact(User user, String contactId, UpdateContactRequest request);
 
     public Page<ContactResponse> getAllContact(User user, SearchContactRequest request);
+
+    public void delete(User user, String contactId);
 }
